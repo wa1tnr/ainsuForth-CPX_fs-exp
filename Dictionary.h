@@ -1,6 +1,7 @@
 // Wed Aug  2 18:04:12 UTC 2017
 // 4735-b0c-05-
 
+#include "src/kernel/download.h"
 #include "src/kernel/load.h"
 
 // #include "src/kernel/getkey.h"
