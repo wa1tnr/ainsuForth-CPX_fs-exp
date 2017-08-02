@@ -103,6 +103,9 @@ uint8_t spiFlashReading;       // Adafruit SPI flash: reading
 uint8_t spiFlashWaiting = FALSE ;       // there is more to read from an open forth source file
 uint8_t fileClosed = TRUE ;
 
+// uint8_t noInterpreter = TRUE  ;
+uint8_t noInterpreter = FALSE ;
+
 // File thisFile; // spi flash file handle
 
 /******************************************************************************/
@@ -267,46 +270,51 @@ void compilePrompt(void) {
 /** Outer interpreter                                                        **/
 /******************************************************************************/
 void loop(void) {
-  cpSource = cpToIn = cInputBuffer;
-  cpSourceEnd = cpSource + getLine(cpSource, BUFFER_SIZE);
-  if (cpSourceEnd > cpSource) {
-      interpreter();
-
-      // if (spiFlashWaiting) { Serial.println("debug: LOOP - flash is WAITING."); }
-
-    if (errorCode) {
-        errorCode = 0;
-    } else {
-      if (!state) {
-        Serial.print(ok_str);
-        // This shows a DOT for each item on the data stack
-        char i = dStack_size();
-        while(i--) {
-            Serial.print(".");
+    cpSource = cpToIn = cInputBuffer;
+    cpSourceEnd = cpSource + getLine(cpSource, BUFFER_SIZE);
+    if (cpSourceEnd > cpSource) {
+        // 106 uint8_t noInterpreter = FALSE ;
+        if (noInterpreter) {
+            int fake_intptr = 0;
+        } else {
+            interpreter();
         }
-        Serial.println();
-      }
+
+        // if (spiFlashWaiting) { Serial.println("debug: LOOP - flash is WAITING."); }
+
+        if (errorCode) {
+            errorCode = 0;
+        } else {
+            if (!state) {
+                // suppress the ok prompt during ASCII upload:
+                if (noInterpreter) {
+                    int fake_intptrTwo = 0;
+                } else {
+                Serial.print(ok_str);
+                }
+                // This shows a DOT for each item on the data stack
+                char i = dStack_size();
+                while(i--) {
+                    Serial.print(".");
+                }
+                Serial.println();
+            }
+        }
+    } else { // test failed; do not run interpreter().
+        Serial.println(ok_str); // Leo Brodie 'Starting Forth' expects an ok here
+    } // replace these four lines with a single closing curly brace
+      // to restore YAFFA behavior.
+
+
+    if (state) {
+        compilePrompt();
+    } else {
+        if (spiFlashReading) {
+            int fake = 0;
+            // Serial.println("debug: we are still reading near compilePrompt.");
+        }
+            Serial.print(prompt_str);
     }
-
-
-  } else { // test failed; do not run interpreter().
-    Serial.println(ok_str); // Leo Brodie 'Starting Forth' expects an ok here
-  } // replace these four lines with a single closing curly brace
-    // to restore YAFFA behavior.
-
-
-  if (state) {
-      compilePrompt();
-      // Serial.println("\r\n SPECIAL Line 297: \r\n");
-  } else {
-
-      if (spiFlashReading) {
-          int fake = 0;
-          // Serial.println("debug: we are still reading near compilePrompt.");
-      }
-
-      Serial.print(prompt_str);
-  }
 }
 
 
