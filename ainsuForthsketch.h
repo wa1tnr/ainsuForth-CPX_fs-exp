@@ -3,5 +3,6 @@
 
 #include "src/kernel/signon.h"
 #include "src/kernel/getline.h"
+#include "src/kernel/dl_interpreter.h"
 #include "src/kernel/interpreter.h"
 #include "src/kernel/stacks.h"

@@ -4,4 +4,5 @@
 // prototypes - this word
 extern const char download_str[]; // = "download";
 extern void _download(void);
+extern uint8_t noInterpreter; // = FALSE ;
 

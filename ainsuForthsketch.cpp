@@ -276,6 +276,7 @@ void loop(void) {
         // 106 uint8_t noInterpreter = FALSE ;
         if (noInterpreter) {
             int fake_intptr = 0;
+            dl_interpreter();
         } else {
             interpreter();
         }
