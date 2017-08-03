@@ -1,5 +1,5 @@
-// Wed Aug  2 18:04:12 UTC 2017
-// 4735-b0c-05-
+// Thu Aug  3 01:46:56 UTC 2017
+// 4735-b0d-00-
 
 // poor practice -- hard coded the answer:
 #ifdef HAS_DOTSTAR_LIB
@@ -86,6 +86,7 @@ char cTokenBuffer[WORD_SIZE];  // Stores Single Parsed token to be acted on
 /**  Flash Dictionary Structure                                              **/
 /******************************************************************************/
 const flashEntry_t* pFlashEntry = flashDict;   // Pointer into the flash Dictionary
+const flashEntry_t* pDLFlashEntry = DLflashDict; // Pointer into the DL vocab flash Dictionary
 
 /******************************************************************************/
 /**  User Dictionary is stored in name space.                                **/
@@ -276,9 +277,14 @@ void loop(void) {
         // 106 uint8_t noInterpreter = FALSE ;
         if (noInterpreter) {
             int fake_intptr = 0;
-            dl_interpreter();
+            dl_interpreter(); // if download sets noInterpreter == TRUE, then
+                              // this is called after the 'download' word has
+                              // executed, and, some other word has, also ..
+                              // a bit too late, without further considerations.
+            Serial.println("\r\ndebug: dl_interpreter() just executed.\r\n");
         } else {
             interpreter();
+            Serial.println("\r\ndebug: interpreter() just executed.\r\n");
         }
 
         // if (spiFlashWaiting) { Serial.println("debug: LOOP - flash is WAITING."); }

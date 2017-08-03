@@ -1,5 +1,5 @@
-// Wed Aug  2 18:04:12 UTC 2017
-// 4735-b0c-05-
+// Thu Aug  3 01:46:56 UTC 2017
+// 4735-b0d-00-
 
 // download interpreter
 
@@ -7,7 +7,6 @@
 #include "../../yaffa.h"
 // #include "../../Error_Codes.h"
 
-//  do not restore: // #ifdef EXT_KERN_INTERPRETER
 #include "dl_interpreter.h"
 /******************************************************************************/
 /** Interpeter - Interprets a new string                                     **/
@@ -18,6 +17,9 @@
 /******************************************************************************/
 void dl_interpreter(void) {
     func function;
+    if (noInterpreter) {
+        Serial.println("\r\nnoInterpreter == TRUE\r\n");
+    }
     while (getToken()) {
 
 
@@ -26,23 +28,25 @@ void dl_interpreter(void) {
         /*************************/
         /** Compile Mode        **/
         /*************************/
-            if (isWord(cTokenBuffer)) {
+            if (isDLWord(cTokenBuffer)) {
                 if (wordFlags & IMMEDIATE) {
                     if (w > 255) {
                         rStack_push(0);        // Push 0 as our return address
                         ip = (cell_t *)w;    // set the ip to the XT (memory location)
-                        executeWord();
+                        // executeWord();
+                        Serial.println("\r\ndebug: Error line 38 dl_interpreter.cpp.\r\n");
                     } else {
-                        function = flashDict[w - 1].function;
+                        function = DLflashDict[w - 1].function;
                         function();
                         if (errorCode) return;
                     }
-                    executeWord();  // Why is this here?
+                    // executeWord();  // Why is this here?
+                    Serial.println("\r\ndebug: Error line 45 dl_interpreter.cpp.\r\n");
                 } else {
                     *pHere++ = w;
                 } // ends stanza that began 'if (wordFlags & IMMEDIATE)'
-            } // ends stanza that began 'if (isWord(cTokenBuffer))'
-            else if (isNumber(cTokenBuffer)) {
+            } // ends stanza that began 'if (isDLWord(cTokenBuffer))'
+            else if (isDLNumber(cTokenBuffer)) {
                 _literal();
             }
             else {
@@ -59,7 +63,7 @@ void dl_interpreter(void) {
             /************************/
             /* Interpret Mode       */
             /************************/
-            if (isWord(cTokenBuffer)) {
+            if (isDLWord(cTokenBuffer)) {
                 if (wordFlags & COMP_ONLY) {
                     dStack_push(-14);
                     _throw();
@@ -68,16 +72,17 @@ void dl_interpreter(void) {
                 if (w > 255) {
                     rStack_push(0);           // Push 0 as our return address
                     ip = (cell_t *)w;         // set the ip to the XT (memory location)
-                    executeWord();
+                    // executeWord();
+                    Serial.println("\r\ndebug: Error line 77 dl_interpreter.cpp.\r\n");
                     if (errorCode) return;
                 }
                 else {
-                    function = flashDict[w - 1].function;
+                    function = DLflashDict[w - 1].function;
                     function();
                     if (errorCode) return;
                 }
-            } // ends stanza that began 'if (isWord(cTokenBuffer))'
-            else if (isNumber(cTokenBuffer)) {
+            } // ends stanza that began 'if (isDLWord(cTokenBuffer))'
+            else if (isDLNumber(cTokenBuffer)) {
                 int fake_Int_xx = 0 ; // noop // Is something supposed to be here?
             }
             else {
@@ -95,5 +100,4 @@ void dl_interpreter(void) {
     } // ends stanza that began 'while (getToken())'
     cpToIn = cpSource;
   }
-  // do not restore: // #endif
 

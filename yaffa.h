@@ -1,5 +1,5 @@
-// Wed Aug  2 18:04:12 UTC 2017
-// 4735-b0c-05-
+// Thu Aug  3 01:46:56 UTC 2017
+// 4735-b0d-00-
 
 // 29 July -- not proofread very well.  Needs testing.  See diff.
 
@@ -233,6 +233,7 @@ typedef struct  {                   // Structure of the dictionary
 } flashEntry_t;
 
 extern const flashEntry_t flashDict[];        // forward reference
+extern const flashEntry_t DLflashDict[];        // forward reference
 
 /******************************************************************************/
 /**  Stack Structure.                                                        **/

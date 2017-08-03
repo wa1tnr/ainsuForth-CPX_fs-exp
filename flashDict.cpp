@@ -1,5 +1,5 @@
-// Wed Aug  2 18:04:12 UTC 2017
-// 4735-b0c-05-
+// Thu Aug  3 01:46:56 UTC 2017
+// 4735-b0d-00-
 
 #include <Arduino.h>
 #include "yaffa.h"
@@ -49,6 +49,10 @@ static void _two_drop(void) {
 //     flashDict[] assignment
 // belongs in flashDict.cpp for reorganization.
 
+const flashEntry_t DLflashDict[] = {
+  { dl_ends_str,        _dl_ends,         NORMAL },  // IMMEDIATE
+  { NULL,               NULL,             NORMAL }
+};
 
 /**                         Dictionary Initialization                           **/
 const flashEntry_t flashDict[] = {

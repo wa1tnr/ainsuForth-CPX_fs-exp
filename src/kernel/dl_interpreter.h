@@ -1,11 +1,7 @@
-// Wed Aug  2 18:04:12 UTC 2017
-// 4735-b0c-05-
-
-// extern const char literal_str[]; // = "literal";
+// Thu Aug  3 01:46:56 UTC 2017
+// 4735-b0d-00-
 
 extern void dl_interpreter(void);
-
-// extern const flashEntry_t flashDict[];
 
 extern char* cpSource;      // Pointer to the string location that we will
 
@@ -30,8 +26,10 @@ extern void executeWord(void);
 extern void dStack_push(cell_t value);
 extern void rStack_push(cell_t value);
 // extern cell_t dStack_pop(void);
-extern uint8_t isWord(char* addr);
-extern uint8_t isNumber(char* subString);
+extern uint8_t isDLWord(char* addr);
+extern uint8_t isDLNumber(char* subString);
 extern void _literal(void);
 extern void _throw(void);
+
+extern uint8_t noInterpreter; // = FALSE ;
 

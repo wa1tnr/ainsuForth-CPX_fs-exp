@@ -1,11 +1,10 @@
-// Wed Aug  2 18:04:12 UTC 2017
-// 4735-b0c-05-
+// Thu Aug  3 01:46:56 UTC 2017
+// 4735-b0d-00-
 
-// FOSTIMIK  TEPLUNOK  18:07z
+// CAPIVATTE   MELFONTUG   CHEFRIKABO   01:48z Thu 03 Aug 2017
 
-// MUVALE  TEBCU KEPFIK  NAPSO  PLAVA  FELTU
+// FOSTIMIK  TEPLUNOK   MUVALE  TEBCU KEPFIK  NAPSO  PLAVA  FELTU
 
-// QUAVRO  MUVAK  PINTUBABIK 
 
 // the 'see' word was reinstated.  Appears to function well.  2 July 22:44z
 
