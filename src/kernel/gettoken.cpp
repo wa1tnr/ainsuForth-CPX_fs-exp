@@ -1,5 +1,5 @@
-// Sun Jun 18 02:05:55 UTC 2017
-// 4735-a0k
+// Thu Aug  3 13:47:02 UTC 2017
+// 4735-b0d-01-
 
 #include <Arduino.h>
 #include "../../yaffa.h"
@@ -7,6 +7,9 @@
 
 #ifdef EXT_KERN_GETTOKEN
 #include "gettoken.h"
+
+// uint8_t alreadyParsed = FALSE ;
+
 /******************************************************************************/
 /** GetToken                                                                 **/
 /**   Find the next token in the buffer and stores it into the token buffer  **/
@@ -28,9 +31,44 @@
 // included as a concession to existing programs that use CONVERT. A program shall 
 // not depend on the existence of the space.
 /******************************************************************************/
+
+/*
+
+ 65 char* cpSource;                 // Pointer to the string location that we will
+ 66                                 // evaluate. This could be the input buffer or
+ 67                                 // some other location in memory
+ 68 char* cpSourceEnd;              // Points to the end of the source string
+ 69 char* cpToIn;                   // Points to a position in the source string
+ 70                                 // that was the last character to be parsed
+ 71 char cDelimiter = ' ';          // The parsers delimiter
+ 72 char cInputBuffer[BUFFER_SIZE]; // Input Buffer that gets parsed
+ 73 char cTokenBuffer[WORD_SIZE];  // Stores Single Parsed token to be acted on
+
+
+
+*/
+
+
+
+
 uint8_t getToken(void) {
   uint8_t tokenIdx = 0;
   while (cpToIn <= cpSourceEnd) {
+
+      if (noInterpreter) {
+          if (alreadyParsed) {
+              int fakeAP = 0; // noop
+          } else {
+              Serial.print(" <<DELIMITER_BEGIN ~");
+              Serial.print(cpSource);
+              Serial.print("~ DELIMITER_END >> ");
+              alreadyParsed = TRUE ; // reset
+          }
+      }
+
+
+
+
     if ((*cpToIn == cDelimiter) || (*cpToIn == 0)) {
       cTokenBuffer[tokenIdx] = '\0';       // Terminate SubString
       cpToIn++;

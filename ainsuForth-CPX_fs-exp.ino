@@ -1,7 +1,14 @@
-// Thu Aug  3 01:46:56 UTC 2017
-// 4735-b0d-00-
+// Thu Aug  3 13:47:02 UTC 2017
+// 4735-b0d-01-
 
-// PELFOGUE   MASPA   VILMOX  03:05z Thu 03 Aug 2017
+// KELKANNE  GRIAMO  FISPARD  16:16z Thu 03 Aug 2017
+
+// file echo complete.  Needs: parsing (or 'de-parsing' -- for whole-line repeat).
+
+// partial: input line is echoed, and only once, in preparation for file capture to SPI flash as a file.fs or file.txt &c.
+
+// FIMSOPHE  GASCAV  PELLIAX 
+
 
 // CAPIVATTE   MELFONTUG   CHEFRIKABO FOSTIMIK  TEPLUNOK 
 

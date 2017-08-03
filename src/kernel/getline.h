@@ -1,10 +1,16 @@
-// Tue Aug  1 23:21:00 UTC 2017
-// 4735-b0c-01-
+// Thu Aug  3 13:47:02 UTC 2017
+// 4735-b0d-01-
 
 #include <Arduino.h>
 #include "../../yaffa.h"
 
 extern char getKey(void);
+// dl_interpreter.h:extern uint8_t noInterpreter; // = FALSE ;
+
+extern uint8_t noInterpreter; // = FALSE ;
+
+extern char getDLKey(void);
+
 extern uint8_t getLine(char* ptr, uint8_t buffSize);
 
 extern uint8_t flags;                 // Internal Flags

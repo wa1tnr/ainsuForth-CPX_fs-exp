@@ -1,5 +1,5 @@
-// Thu Aug  3 01:46:56 UTC 2017
-// 4735-b0d-00-
+// Thu Aug  3 13:47:02 UTC 2017
+// 4735-b0d-01-
 
 // poor practice -- hard coded the answer:
 #ifdef HAS_DOTSTAR_LIB
@@ -106,6 +106,7 @@ uint8_t fileClosed = TRUE ;
 
 // uint8_t noInterpreter = TRUE  ;
 uint8_t noInterpreter = FALSE ;
+uint8_t alreadyParsed = FALSE ;
 
 // File thisFile; // spi flash file handle
 
@@ -272,11 +273,26 @@ void compilePrompt(void) {
 /******************************************************************************/
 void loop(void) {
     cpSource = cpToIn = cInputBuffer;
+
+// -------------------------------------------------------------
+// very last thing done before the commit was to set this trap,
+// to avoid duplicate lines in the outfile (when it is setup to
+// capture, which hasn't happened yett.  03 Aug 2017 15:08z
+
+    alreadyParsed = FALSE ; // single-shot trap
+// -------------------------------------------------------------
+
+
+
     cpSourceEnd = cpSource + getLine(cpSource, BUFFER_SIZE);
+
+
+
     if (cpSourceEnd > cpSource) {
+
         // 106 uint8_t noInterpreter = FALSE ;
+
         if (noInterpreter) {
-            int fake_intptr = 0;
             dl_interpreter(); // if download sets noInterpreter == TRUE, then
                               // this is called after the 'download' word has
                               // executed, and, some other word has, also ..

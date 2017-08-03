@@ -1,5 +1,5 @@
-// Wed Aug  2 01:22:51 UTC 2017
-// 4735-b0c-03-
+// Thu Aug  3 13:47:02 UTC 2017
+// 4735-b0d-01-
 
 #include <Arduino.h>
 #include "../../yaffa.h"
@@ -19,6 +19,62 @@
 Adafruit_SPIFlash flash(FLASH_SS, &FLASH_SPI_PORT);     // Use hardware SPI 
 
 Adafruit_W25Q16BV_FatFs fatfs(flash);
+
+/******************************************************************************/
+/** getDLKey                                                                 **/
+/**   waits for the next valid key to be entered in download mode (DL)       **/
+/**   and return its value                                                   **/
+/**   Watches for code-escape key '\' (backslash) to detect the '\end.' word **/
+/**                                                                          **/
+/**   Valid characters are:  Backspace, Carriage Return (0x0d), Escape,      **/
+/**   Tab, Newline (0x0a) and standard (printable) characters                **/
+/******************************************************************************/
+char getDLKey(void) {
+    char inChar;
+
+
+
+    // the load word provides this boolean:
+
+
+#ifdef NEVER_DEFINED
+    if (spiFlashReading) {
+
+        if (inChar == ASCII_BS  ||
+            inChar == ASCII_TAB ||
+            inChar == ASCII_CR  ||  
+            inChar == ASCII_NL  ||   // new
+            inChar == ASCII_DEL ||   // new
+            inChar == ASCII_ESC ||
+            isprint(inChar)) {
+            return inChar;
+        }
+
+    } else {
+#endif
+
+
+        while (1) {
+            if (Serial.available()) {
+                inChar = Serial.read();
+                if (inChar == ASCII_BS  ||
+                    inChar == ASCII_TAB ||
+                    inChar == ASCII_CR  ||  
+                    inChar == ASCII_NL  ||   // new
+                    inChar == ASCII_DEL ||   // new
+                    inChar == ASCII_ESC ||
+                    isprint(inChar)) {
+                    return inChar;
+                }
+            }
+        }
+
+#ifdef NEVER_DEFINED
+    }
+#endif
+
+
+}
 
 void setup_spi_flash(void) {
   // Serial.println("SPI Flash - reading");
@@ -90,7 +146,30 @@ uint8_t getLine(char* ptr, uint8_t buffSize) {
         }
 
     } else {
-        inChar = getKey(); 
+
+
+
+        // ainsuForthsketch.cpp Line 108: uint8_t noInterpreter = FALSE ;
+
+        if (noInterpreter) {
+//          Serial.println("  debug: getline.cpp Line: 156 -- getDLkey()");
+
+//          inChar = getDLKey();  // not needed?
+
+            inChar = getKey();
+
+
+            if (inChar == '\\') {
+                Serial.print("ESC \\ SEEN in getLine().\r\n");
+            }
+
+
+        } else {
+            inChar = getKey(); 
+        }
+
+
+
     }
 
     // inChar is now populated; either by keypress or by byte stored in SPI flash.
