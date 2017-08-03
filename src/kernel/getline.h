@@ -1,8 +1,10 @@
-// Thu Aug  3 18:43:18 UTC 2017
-// 4735-b0e-05-
+// Thu Aug  3 19:07:55 UTC 2017
+// 4735-b0f-00-
 
 #include <Arduino.h>
 #include "../../yaffa.h"
+
+extern uint8_t silentReading;         // the load word is silent, if this flag is set
 
 extern char getKey(void);
 // dl_interpreter.h:extern uint8_t noInterpreter; // = FALSE ;

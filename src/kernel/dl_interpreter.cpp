@@ -1,5 +1,5 @@
-// Thu Aug  3 01:46:56 UTC 2017
-// 4735-b0d-00-
+// Thu Aug  3 19:07:55 UTC 2017
+// 4735-b0f-00-
 
 // download interpreter
 
@@ -17,49 +17,8 @@
 /******************************************************************************/
 void dl_interpreter(void) {
     func function;
-    if (noInterpreter) {
-        // debug: // Serial.println("\r\nnoInterpreter == TRUE\r\n");
-    }
+    // if (noInterpreter) { }
     while (getToken()) {
-
-
-#ifdef NEVER_DEFINED_
-        if (state) {
-        /*************************/
-        /** Compile Mode        **/
-        /*************************/
-            if (isDLWord(cTokenBuffer)) {
-                if (wordFlags & IMMEDIATE) {
-                    if (w > 255) {
-                        rStack_push(0);        // Push 0 as our return address
-                        ip = (cell_t *)w;    // set the ip to the XT (memory location)
-                        // executeWord();
-                        Serial.println("\r\ndebug: Error line 38 dl_interpreter.cpp.\r\n");
-                    } else {
-                        function = DLflashDict[w - 1].function;
-                        function();
-                        if (errorCode) return;
-                    }
-                    // executeWord();  // Why is this here?
-                    Serial.println("\r\ndebug: Error line 45 dl_interpreter.cpp.\r\n");
-                } else {
-                    *pHere++ = w;
-                } // ends stanza that began 'if (wordFlags & IMMEDIATE)'
-            } // ends stanza that began 'if (isDLWord(cTokenBuffer))'
-            else if (isDLNumber(cTokenBuffer)) {
-                _literal();
-            }
-            else {
-                dStack_push(-13);
-                _throw();
-            }
-        } // ends stanza that began 'if (state)'
-
-
-        else { // 'if (state) { foo } else ...
-#endif
-
-
             /************************/
             /* Interpret Mode       */
             /************************/
@@ -70,11 +29,7 @@ void dl_interpreter(void) {
                     return;
                 }
                 if (w > 255) {
-                //  rStack_push(0);           // Push 0 as our return address
-                //  ip = (cell_t *)w;         // set the ip to the XT (memory location)
-                    // executeWord();
                     Serial.println("\r\ndebug: Error line 77 dl_interpreter.cpp.\r\n");
-                //  if (errorCode) return;
                 }
                 else {
                     function = DLflashDict[w - 1].function;
@@ -83,22 +38,12 @@ void dl_interpreter(void) {
                 }
             } // ends stanza that began 'if (isDLWord(cTokenBuffer))'
 
-
             else if (isDLNumber(cTokenBuffer)) {
                 int fake_Int_xx = 0 ; // noop // Is something supposed to be here?
             }
             else {
-                // debug: // Serial.println("\r\n Would be an error in a different vocabulary.\r\n");
-                // dStack_push(-13);
-                // _throw();
                 return;
             }
-
-#ifdef NEVER_DEFINED_
-        } // ends stanza that began 'if (state) .. else ..'
-#endif
-
-
 
     } // ends stanza that began 'while (getToken())'
     cpToIn = cpSource;

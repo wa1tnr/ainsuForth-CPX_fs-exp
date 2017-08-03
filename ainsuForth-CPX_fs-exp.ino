@@ -1,9 +1,11 @@
-// Thu Aug  3 18:43:18 UTC 2017
-// 4735-b0e-05-
+// Thu Aug  3 19:07:55 UTC 2017
+// 4735-b0f-00-
 
-// FOSTETH  03 Aug 2017  18:30z  vy good now.
+// MULAMOTTE   HELEGRIDAK   03 Aug 2017  19:07z  -  the echo! word controls some silences
 
-// next: suppress echo during a file download.
+// KELDRIN  NOKURVID   FOSTETH 
+
+// next: suppress echo during a file download.  Hmm.  It's suppressed when 'load' is run.
 
 // NOTE: it is a 'download' because one is logged into the SAMD21 board,
 // via USB and a terminal, and issues the command to 'download' from
@@ -16,7 +18,7 @@
 // --------------------------------------------------
 // --------------------------------------------------
 // ---                                  -------------
-// ---   Thu Aug  3 16:25:56 UTC 2017   -------------
+// ---   Thu Aug  3 21:42:35 UTC 2017   -------------
 // ---                                  -------------
 // --------------------------------------------------
 // --------------------------------------------------

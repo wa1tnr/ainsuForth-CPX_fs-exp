@@ -288,6 +288,7 @@ const flashEntry_t flashDict[] = {
 #define SPI_FLASH_SRC
 #ifdef SPI_FLASH_SRC
   { load_str,           _load,            NORMAL },
+  { echo_bang_str,      _echo_bang,       NORMAL }, 
   { download_str,       _download,        NORMAL },
 #endif // #ifdef SPI_FLASH_SRC
 

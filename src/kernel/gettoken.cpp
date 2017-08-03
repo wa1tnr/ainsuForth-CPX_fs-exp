@@ -1,5 +1,5 @@
-// Thu Aug  3 18:43:18 UTC 2017
-// 4735-b0e-05-
+// Thu Aug  3 19:07:55 UTC 2017
+// 4735-b0f-00-
 
 #include <Arduino.h>
 #include "../../yaffa.h"
@@ -48,7 +48,7 @@
 
 
 uint8_t getToken(void) {
-  String inString, endFiletring;
+  String inString, endFileString;
   uint8_t tokenIdx = 0;
   while (cpToIn <= cpSourceEnd) {
 
@@ -73,36 +73,36 @@ uint8_t getToken(void) {
 
     //        if ((*cpToIn == cDelimiter) || (*cpToIn == 0)) {
 
-              // String inString, endFiletring;
+              // String inString, endFileString;
 
 // -----------------------------------------------------------------
               inString = String(cpSource); // GOOD do not change
 // -----------------------------------------------------------------
 
-              endFiletring = ("\\end.");
+              endFileString = ("\\end.");
 
-              // if (inString == endFiletring) { Serial.print("Aha. Line 68 gettoken.cpp SEEN.\r\n"); }
+              // if (inString == endFileString) { Serial.print("Aha. Line 68 gettoken.cpp SEEN.\r\n"); }
 
               // debug: // Serial.print("compare these:  ");
               // debug: // Serial.print(inString);
               // debug: // Serial.print("  and  ");
-              // debug: // Serial.print(endFiletring);
+              // debug: // Serial.print(endFileString);
               // debug: // Serial.print("  for a match.  ");
 
 
-              // debug: // if (inString == endFiletring) { Serial.print("Aha. Line 68 gettoken.cpp SEEN.\r\n"); }
+              // debug: // if (inString == endFileString) { Serial.print("Aha. Line 68 gettoken.cpp SEEN.\r\n"); }
 
               // debug: // Serial.print("Now, write to the file: \r\n");
 
 
 
-              if (inString == endFiletring) { // DO NOT PRINT TO FILE - escape/exit token found.
+              if (inString == endFileString) { // DO NOT PRINT TO FILE - escape/exit token found.
 
                     // Serial.print("Aha. Line 68 gettoken.cpp SEEN.\r\n"); }
                     int fake_Stri = 0; // nop
                     
               } else {
-              write_a_capture_file(); // this routine knows about cpSource
+                  write_a_capture_file(); // this routine knows about cpSource
               }
 
 

@@ -1,5 +1,5 @@
-// Thu Aug  3 18:43:18 UTC 2017
-// 4735-b0e-05-
+// Thu Aug  3 19:07:55 UTC 2017
+// 4735-b0f-00-
 
 // poor practice -- hard coded the answer:
 #ifdef HAS_DOTSTAR_LIB
@@ -101,6 +101,9 @@ userEntry_t* pNewUserEntry = NULL;
 uint8_t flags;                 // Internal Flags
 uint8_t wordFlags;             // Word flags
 uint8_t spiFlashReading;       // Adafruit SPI flash: reading
+
+uint8_t silentReading = FALSE ;   // the load word is silent, if this flag is set
+
 uint8_t spiFlashWaiting = FALSE ;       // there is more to read from an open forth source file
 uint8_t fileClosed = TRUE ;
 
@@ -202,7 +205,6 @@ void setup(void) {
 #define HAS_SPI_FLASH_DEMO
 
 #ifdef HAS_SPI_FLASH_DEMO
-  // spiFlashReading = TRUE ;  // Adafruit SPI flash: reading
   setup_spi_flash();
       // WORKS: 01 Aug 04:09z
       // read_a_test_file();
@@ -226,7 +228,7 @@ void setup(void) {
   pOldHere = pHere;
   
   // Serial.print("\n warm boot message - early bird.  //  Gemma M0 29 Jul 2017\r\n          type 'warm' to reboot"); // instant confirmation
-     Serial.print("\n warm boot message - early bird.  //  Adafruit CPlay Express (CPX)\r\n      snapshot 30 Jul 2017\r\n          type 'warm' to reboot"); // instant confirmation
+     Serial.print("\n warm boot message - early bird.  //  Adafruit CPlay Express (CPX)\r\n      DEVELOPMENT 03 Aug 2017\r\n          type 'warm' to reboot"); // instant confirmation
   // Serial.print("\n warm boot message - early bird.  //  Adafruit Metro M0 Express\r\n      snapshot 30 Jul 2017\r\n          type 'warm' to reboot"); // instant confirmation
   // Serial.print("\n warm boot message - early bird.  //  Adafruit Feather M0 Express\r\n      snapshot 30 Jul 2017\r\n          type 'warm' to reboot"); // instant confirmation
 
@@ -313,35 +315,71 @@ void loop(void) {
                 if (noInterpreter) {
                     int fake_intptrTwo = 0;
                 } else {
-                Serial.print(ok_str);
+
+
+// was good but not quite enough to suppress CR/LF echo during a 'load' op:
+
+                if (silentReading) {
+                } else {
+                    Serial.print(ok_str);
+                }
+
+
                 }
                 // This shows a DOT for each item on the data stack
                 char i = dStack_size();
                 while(i--) {
                     Serial.print(".");
                 }
-                Serial.println();
+
+                if (silentReading) {
+                } else {
+                    Serial.println();
+                }
+
+
             }
         }
     } else { // test failed; do not run interpreter().
 
         if (noInterpreter) {
-            Serial.print("\r\n"); // just echo the CR/LF here
+            // if (silentReading) {
+            // } else {
+                Serial.print("\r\n"); // just echo the CR/LF here
+            // }
+        } else {
+
+
+        if (silentReading) {
+            int fake_SRT = 0;
         } else {
             Serial.println(ok_str); // Leo Brodie 'Starting Forth' expects an ok here
+        }
         }
     } // replace these four lines with a single closing curly brace
       // to restore YAFFA behavior.
 
 
     if (state) {
-        compilePrompt();
+        // if (silentReading && spiFlashReading && fileClosed) {
+        if (silentReading && spiFlashReading) {
+            int siRea = 0;
+        } else {
+            compilePrompt();
+        }
     } else {
+
+        // check what was here an hour ago -- don't remember if any flags were here.
+
+        // if (silentReading && spiFlashReading) {
+        // if (silentReading && fileClosed) {
+        // if (silentReading) {
         if (spiFlashReading) {
             int fake = 0;
             // Serial.println("debug: we are still reading near compilePrompt.");
-        }
+        } else { // dont be shy -- print it to the console
             Serial.print(prompt_str);
+        }
     }
 }
 

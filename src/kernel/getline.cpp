@@ -1,5 +1,5 @@
-// Thu Aug  3 18:43:18 UTC 2017
-// 4735-b0e-05-
+// Thu Aug  3 19:07:55 UTC 2017
+// 4735-b0f-00-
 
 #include <Arduino.h>
 #include "../../yaffa.h"
@@ -29,52 +29,6 @@ Adafruit_W25Q16BV_FatFs fatfs(flash);
 /**   Valid characters are:  Backspace, Carriage Return (0x0d), Escape,      **/
 /**   Tab, Newline (0x0a) and standard (printable) characters                **/
 /******************************************************************************/
-char getDLKey(void) {
-    char inChar;
-
-
-
-    // the load word provides this boolean:
-
-
-#ifdef NEVER_DEFINED
-    if (spiFlashReading) {
-
-        if (inChar == ASCII_BS  ||
-            inChar == ASCII_TAB ||
-            inChar == ASCII_CR  ||  
-            inChar == ASCII_NL  ||   // new
-            inChar == ASCII_DEL ||   // new
-            inChar == ASCII_ESC ||
-            isprint(inChar)) {
-            return inChar;
-        }
-
-    } else {
-#endif
-
-
-        while (1) {
-            if (Serial.available()) {
-                inChar = Serial.read();
-                if (inChar == ASCII_BS  ||
-                    inChar == ASCII_TAB ||
-                    inChar == ASCII_CR  ||  
-                    inChar == ASCII_NL  ||   // new
-                    inChar == ASCII_DEL ||   // new
-                    inChar == ASCII_ESC ||
-                    isprint(inChar)) {
-                    return inChar;
-                }
-            }
-        }
-
-#ifdef NEVER_DEFINED
-    }
-#endif
-
-
-}
 
 void setup_spi_flash(void) {
   // Serial.println("SPI Flash - reading");
@@ -107,18 +61,12 @@ uint8_t getLine(char* ptr, uint8_t buffSize) {
   char inChar;
   uint8_t count = 0;
 
-  // uint8_t fileClosed = TRUE ;
-
-  // Serial.println("debug: is fileClosed TRUE or not?");
-
   // if (fileClosed) { Serial.println("Indeed, fileClosed is TRUE"); }
 
   if (spiFlashReading) {
-      // Serial.println("\r\nSEEN: getline.cpp   line:  60  was 140\r\n");
       // cheap_test: if (fatfs.exists("/forth/job.fs")) {
       if (fatfs.exists("/forth/ascii_xfer_test.txt")) {
           if (fileClosed) {
-
             // Serial.println("(re)opening fatfs .. verify it is okay to do so.");
 
             // cheap_test: File forthSrcFile = fatfs.open("/forth/job.fs",             FILE_READ);
@@ -130,6 +78,7 @@ uint8_t getLine(char* ptr, uint8_t buffSize) {
   }
 
 
+// another getLine() stanza:
   do {
     if (spiFlashReading) {
         if (thisFile) {
@@ -149,30 +98,14 @@ uint8_t getLine(char* ptr, uint8_t buffSize) {
 
     } else {
 
-
-
-        // ainsuForthsketch.cpp Line 108: uint8_t noInterpreter = FALSE ;
-
         if (noInterpreter) {
-//          Serial.println("  debug: getline.cpp Line: 156 -- getDLkey()");
-
-//          inChar = getDLKey();  // not needed?
-
             inChar = getKey();
-
-
             if (inChar == '\\') {
                 // Serial.print("ESC \\ SEEN in getLine().\r\n");
-                int fakeEsSE = 0;
             }
-
-
         } else {
             inChar = getKey(); 
         }
-
-
-
     }
 
     // inChar is now populated; either by keypress or by byte stored in SPI flash.
@@ -181,11 +114,26 @@ uint8_t getLine(char* ptr, uint8_t buffSize) {
        if (count) {
          *--ptr = 0;
          count--; // ainsuForth improvement -- backspace behavior
-        if (flags & ECHO_ON) Serial.print("\b \b");
+
+
+if (silentReading) { } else {
+    if (flags & ECHO_ON) Serial.print("\b \b");
+}
+
+
+
       }
     }
     else if (inChar == ASCII_TAB || inChar == ASCII_ESC) {
+
+
+if (silentReading) { } else {
       if (flags & ECHO_ON) Serial.print("\a");
+}
+
+
+
+
     }
     else if (inChar == ASCII_CR || inChar == ASCII_NL) { // ainsuForth improvement
 
@@ -201,18 +149,67 @@ uint8_t getLine(char* ptr, uint8_t buffSize) {
                           // iirc, interactive typing to the interpreter masks
                           // this behavior, whereas a paste-in unmasks it.
 
-      if (flags & ECHO_ON) Serial.print(" "); // seems to want a space after 'dot' for example.
+// -----------------------------------------------------
+// -----------------------------------------------------
+// -----------------------------------------------------
+// -----------------------------------------------------
+
+      // if (silentReading && spiFlashReading) { // the 'load' word
+      if (silentReading) { // the 'load' word
+      } else {
+              if (flags & ECHO_ON) Serial.print(" "); // seems to want a space after 'dot' for example.
+      }
+// -----------------------------------------------------
+// -----------------------------------------------------
+// TRY TO REMEMBER:
+// 
+// The mechanism to end a file upload to the SPI Flash
+// is a parsed word '\end.'
+
+// Whereas .. the mechanism to end a 'load' (compile
+// into VM code, stored in RAM -- from a disk file forth
+// source program that's stored on SPI FlashROM)
+// 
+// That mechanism is simply to detect if flash is waiting
+// (if we have reached EOF or not while reading a file
+// from the SPI FlashROM chip).
+// -----------------------------------------------------
 
       // debug // Serial.println("EVERYONE");
       // Serial.println("debug: is flash waiting or not?");
       if (spiFlashWaiting) {
+          // Serial.println("a good spot to turn off silentReading perhaps.");
           // Serial.println("Flash is WAITING .. more to read.");
+      } else { 
+          silentReading = FALSE; // we are interactive once more, when spiFlashWaiting changes state
       }
 
       break;
 
     } else {
-      if (flags & ECHO_ON) Serial.print(inChar);
+
+
+
+// always suppress echo when the load word is executed.
+      if (silentReading && spiFlashReading) { // the 'load' word
+          int fakeSPxT = 0;
+      } else {
+          if (flags & ECHO_ON) {
+// -----------------------------------------------------
+// -----------------------------------------------------
+// -----------------------------------------------------
+if (silentReading) {
+} else {
+              // main forth interpreter typing echo is right here:
+              Serial.print(inChar); // do NOT suppress this ordinarily, if ever.
+}
+// -----------------------------------------------------
+// -----------------------------------------------------
+// -----------------------------------------------------
+// -----------------------------------------------------
+          }
+      }
+
       *ptr++ = inChar;
       *ptr = 0;
       count++;
@@ -264,35 +261,6 @@ char getKey(void) {
 }
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -362,35 +330,6 @@ Adafruit_SPIFlash ascii_xfer_flash(FLASH_SS, &FLASH_SPI_PORT);     // Use hardwa
 // Adafruit_SPIFlash flash(FLASH_SCK, FLASH_MISO, FLASH_MOSI, FLASH_SS);
 
 // Adafruit_W25Q16BV_FatFs ascii_xfer_fatfs(ascii_xfer_flash);
-
-
-#ifdef NEVER_USED_OR_DEFINED
-
-void NEVER_USED__ascii_xfer_setup_spi_flash(void) {
-
-  // Serial.println("Adafruit SPI Flash FatFs Full Usage Example");
-  Serial.println("Adafruit SPI Flash - reading");
-  
-  // Initialize flash library and check its chip ID.
-  if (!ascii_xfer_flash.begin(FLASH_TYPE)) {
-    Serial.println("Error, failed to initialize flash chip!");
-    while(1);
-  }
-  Serial.print("Flash chip JEDEC ID: 0x"); Serial.println(ascii_xfer_flash.GetJEDECID(), HEX);
-
-  // First call begin to mount the filesystem.  Check that it returns true
-  // to make sure the filesystem was mounted.
-  if (!fatfs.begin()) {
-    Serial.println("Error, failed to mount newly formatted filesystem!");
-    Serial.println("Was the flash chip formatted with the fatfs_format example?");
-    while(1);
-  }
-  Serial.println("Mounted filesystem!");
-}
-#endif
-
-
-
 
 
 void create_test_directory(void) {
@@ -487,7 +426,10 @@ void read_a_test_file(void) {
   // Read a line of data:
   String line = readFile.readStringUntil('\n');
   // cheap_test: Serial.print("First line of job.fs: "); Serial.println(line);
-  Serial.print("First line of /forth/ascii_xfer_test.txt: "); Serial.println(line);
+  Serial.print("First line of /forth/ascii_xfer_test.txt: ");
+
+
+  Serial.println(line);
 
   // You can get the current position, remaining data, and total size of the file:
   Serial.println("Ignore job.fs and say /forth/ascii_xfer_test.txt here - several lines.");
