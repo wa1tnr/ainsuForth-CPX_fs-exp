@@ -11,7 +11,14 @@
 
 const char echo_bang_str[] = "echo!"; // ( bool -- )
 void _echo_bang(void) { // ( bool -- )
-  silentReading = dStack_pop();
+  uint8_t echo = TRUE ;
+  // silentReading = dStack_pop();
+  echo = dStack_pop();
+  if (echo) { 
+      silentReading = FALSE;
+  } else {
+      silentReading = TRUE;
+  }
 }
 
 const char load_str[] = "load";
