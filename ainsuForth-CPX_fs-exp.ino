@@ -1,7 +1,17 @@
-// Thu Aug  3 15:41:33 UTC 2017
-// 4735-b0e-00-
+// Thu Aug  3 18:43:18 UTC 2017
+// 4735-b0e-05-
 
-// again.
+// FOSTETH  03 Aug 2017  18:30z  vy good now.
+
+// next: suppress echo during a file download.
+
+// NOTE: it is a 'download' because one is logged into the SAMD21 board,
+// via USB and a terminal, and issues the command to 'download' from
+// the host PC to the stamp (SAMD21 target board).
+
+
+// GNAGA
+
 
 // --------------------------------------------------
 // --------------------------------------------------

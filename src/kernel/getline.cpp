@@ -1,5 +1,5 @@
-// Thu Aug  3 13:47:02 UTC 2017
-// 4735-b0d-01-
+// Thu Aug  3 18:43:18 UTC 2017
+// 4735-b0e-05-
 
 #include <Arduino.h>
 #include "../../yaffa.h"
@@ -162,7 +162,8 @@ uint8_t getLine(char* ptr, uint8_t buffSize) {
 
 
             if (inChar == '\\') {
-                Serial.print("ESC \\ SEEN in getLine().\r\n");
+                // Serial.print("ESC \\ SEEN in getLine().\r\n");
+                int fakeEsSE = 0;
             }
 
 
@@ -444,7 +445,7 @@ void write_a_capture_file(void) {
     Serial.println("Error, failed to open ascii_xfer_test.txt for writing!");
     while(1);
   }
-  Serial.println("Opened file /forth/ascii_xfer_test.txt for writing/appending...");
+  // debug: // Serial.println("Opened file /forth/ascii_xfer_test.txt for writing/appending...");
 
   // Once open for writing you can print to the file as if you're printing
   // to the serial terminal, the same functions are available.
@@ -458,7 +459,7 @@ void write_a_capture_file(void) {
 
   // Close the file when finished writing.
   writeFile.close();
-  Serial.println("Wrote -- appended -- to file /forth/ascii_xfer_test.txt!");
+  // debug: // Serial.println("Wrote -- appended -- to file /forth/ascii_xfer_test.txt!");
 }
 
 

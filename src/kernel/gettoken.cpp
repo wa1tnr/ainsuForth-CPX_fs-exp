@@ -1,5 +1,5 @@
-// Thu Aug  3 13:47:02 UTC 2017
-// 4735-b0d-01-
+// Thu Aug  3 18:43:18 UTC 2017
+// 4735-b0e-05-
 
 #include <Arduino.h>
 #include "../../yaffa.h"
@@ -7,8 +7,6 @@
 
 #ifdef EXT_KERN_GETTOKEN
 #include "gettoken.h"
-
-// uint8_t alreadyParsed = FALSE ;
 
 /******************************************************************************/
 /** GetToken                                                                 **/
@@ -44,14 +42,13 @@
  72 char cInputBuffer[BUFFER_SIZE]; // Input Buffer that gets parsed
  73 char cTokenBuffer[WORD_SIZE];  // Stores Single Parsed token to be acted on
 
-
-
 */
 
 
 
 
 uint8_t getToken(void) {
+  String inString, endFiletring;
   uint8_t tokenIdx = 0;
   while (cpToIn <= cpSourceEnd) {
 
@@ -59,10 +56,64 @@ uint8_t getToken(void) {
           if (alreadyParsed) {
               int fakeAP = 0; // noop
           } else {
-              Serial.print(" <<DELIMITER_BEGIN ~");
+              // Serial.print(" <<DELIMITER_BEGIN ~");
+              int fakeAPb = 0; // noop
+
+
+// 24 const char dl_ends_str[] = "\\end.";  // type '\end.' to exit the download vocabulary.
+// "download.cpp"
+
+              // if ((char*) dl_ends_str[] == "\\end.") { Serial.print("Aha. Line 68 gettoken.cpp SEEN.\r\n"); }
+              // if (*dl_ends_str[] == "\\end.") { Serial.print("Aha. Line 68 gettoken.cpp SEEN.\r\n"); }
+              // cTokenBuffer[tokenIdx] = '\0';       // Terminate SubString
+              // if (*cTokenBuffer[] == "\\end.") { Serial.print("Aha. Line 68 gettoken.cpp SEEN.\r\n"); }
+              // if (*cpSource == "\\end.") { Serial.print("Aha. Line 72 gettoken.cpp SEEN.\r\n"); }
+              // if (cpSource == "\end.") { Serial.print("Aha. Line 72 gettoken.cpp SEEN.\r\n"); }
+              // compiles: // if ((char*) cTokenBuffer[tokenIdx] == "\\end.") { Serial.print("Aha. Line 68 gettoken.cpp SEEN.\r\n"); }
+
+    //        if ((*cpToIn == cDelimiter) || (*cpToIn == 0)) {
+
+              // String inString, endFiletring;
+
+// -----------------------------------------------------------------
+              inString = String(cpSource); // GOOD do not change
+// -----------------------------------------------------------------
+
+              endFiletring = ("\\end.");
+
+              // if (inString == endFiletring) { Serial.print("Aha. Line 68 gettoken.cpp SEEN.\r\n"); }
+
+              // debug: // Serial.print("compare these:  ");
+              // debug: // Serial.print(inString);
+              // debug: // Serial.print("  and  ");
+              // debug: // Serial.print(endFiletring);
+              // debug: // Serial.print("  for a match.  ");
+
+
+              // debug: // if (inString == endFiletring) { Serial.print("Aha. Line 68 gettoken.cpp SEEN.\r\n"); }
+
+              // debug: // Serial.print("Now, write to the file: \r\n");
+
+
+
+              if (inString == endFiletring) { // DO NOT PRINT TO FILE - escape/exit token found.
+
+                    // Serial.print("Aha. Line 68 gettoken.cpp SEEN.\r\n"); }
+                    int fake_Stri = 0; // nop
+                    
+              } else {
               write_a_capture_file(); // this routine knows about cpSource
-              Serial.print(cpSource);
-              Serial.print("~ DELIMITER_END >> ");
+              }
+
+
+// ----------------------------------------------------------------------
+// -------------------------- primary echo .. maybe ---------------------
+              // Serial.print(cpSource);
+// ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
+
+              // Serial.print("~ DELIMITER_END >> ");
+              int fakeAPc = 0; // noop
               alreadyParsed = TRUE ; // reset
           }
       }
