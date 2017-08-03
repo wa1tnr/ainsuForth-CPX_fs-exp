@@ -281,10 +281,10 @@ void loop(void) {
                               // this is called after the 'download' word has
                               // executed, and, some other word has, also ..
                               // a bit too late, without further considerations.
-            Serial.println("\r\ndebug: dl_interpreter() just executed.\r\n");
+            // debug: // Serial.println("\r\ndebug: dl_interpreter() just executed.\r\n");
         } else {
             interpreter();
-            Serial.println("\r\ndebug: interpreter() just executed.\r\n");
+            // debug: // Serial.println("\r\ndebug: interpreter() just executed.\r\n");
         }
 
         // if (spiFlashWaiting) { Serial.println("debug: LOOP - flash is WAITING."); }

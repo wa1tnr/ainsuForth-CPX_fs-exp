@@ -83,8 +83,11 @@ SKIP:                // common code to skip initial character
     subString++;
   }
   if (negate) number = ~number + 1;     // apply sign, if necessary
-  dStack_push(number);
+
+  // This is a downloader so there's no pushing of anything onto the stack!
+  // dStack_push(number);
   base = tempBase;
-  return 1;
+  // return 1; // only when an int was pushed
+  return 0; // nothing was pushed.
 }
 

@@ -18,7 +18,7 @@
 void dl_interpreter(void) {
     func function;
     if (noInterpreter) {
-        Serial.println("\r\nnoInterpreter == TRUE\r\n");
+        // debug: // Serial.println("\r\nnoInterpreter == TRUE\r\n");
     }
     while (getToken()) {
 
@@ -70,11 +70,11 @@ void dl_interpreter(void) {
                     return;
                 }
                 if (w > 255) {
-                    rStack_push(0);           // Push 0 as our return address
-                    ip = (cell_t *)w;         // set the ip to the XT (memory location)
+                //  rStack_push(0);           // Push 0 as our return address
+                //  ip = (cell_t *)w;         // set the ip to the XT (memory location)
                     // executeWord();
                     Serial.println("\r\ndebug: Error line 77 dl_interpreter.cpp.\r\n");
-                    if (errorCode) return;
+                //  if (errorCode) return;
                 }
                 else {
                     function = DLflashDict[w - 1].function;
@@ -82,12 +82,15 @@ void dl_interpreter(void) {
                     if (errorCode) return;
                 }
             } // ends stanza that began 'if (isDLWord(cTokenBuffer))'
+
+
             else if (isDLNumber(cTokenBuffer)) {
                 int fake_Int_xx = 0 ; // noop // Is something supposed to be here?
             }
             else {
-                dStack_push(-13);
-                _throw();
+                // debug: // Serial.println("\r\n Would be an error in a different vocabulary.\r\n");
+                // dStack_push(-13);
+                // _throw();
                 return;
             }
 
