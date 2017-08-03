@@ -60,6 +60,7 @@ uint8_t getToken(void) {
               int fakeAP = 0; // noop
           } else {
               Serial.print(" <<DELIMITER_BEGIN ~");
+              write_a_capture_file(); // this routine knows about cpSource
               Serial.print(cpSource);
               Serial.print("~ DELIMITER_END >> ");
               alreadyParsed = TRUE ; // reset

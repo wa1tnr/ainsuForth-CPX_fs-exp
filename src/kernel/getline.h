@@ -46,3 +46,5 @@ extern void tail_code_bb(void);
 
 extern void ascii_xfer_spi_flash_main(void);
 // extern void loop_flash_main(void);
+extern char* cpSource;                 // Pointer to the string location that we will
+

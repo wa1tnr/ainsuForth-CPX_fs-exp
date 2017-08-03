@@ -115,12 +115,14 @@ uint8_t getLine(char* ptr, uint8_t buffSize) {
 
   if (spiFlashReading) {
       // Serial.println("\r\nSEEN: getline.cpp   line:  60  was 140\r\n");
-      if (fatfs.exists("/forth/job.fs")) {
+      // cheap_test: if (fatfs.exists("/forth/job.fs")) {
+      if (fatfs.exists("/forth/ascii_xfer_test.txt")) {
           if (fileClosed) {
 
             // Serial.println("(re)opening fatfs .. verify it is okay to do so.");
 
-            File forthSrcFile = fatfs.open("/forth/job.fs", FILE_READ);
+            // cheap_test: File forthSrcFile = fatfs.open("/forth/job.fs",             FILE_READ);
+            File forthSrcFile = fatfs.open("/forth/ascii_xfer_test.txt", FILE_READ);
             thisFile = (File) forthSrcFile;
             fileClosed = FALSE ; // it is open, now.
           }
@@ -277,6 +279,32 @@ char getKey(void) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  ---------------------------    ascii  transfer   --------------------------
+
+
+//                      03 August 2017  15:49z begin.
+
+
 // Wed Aug  2 01:22:51 UTC 2017
 // 4735-b0c-03-
 
@@ -332,10 +360,12 @@ Adafruit_SPIFlash ascii_xfer_flash(FLASH_SS, &FLASH_SPI_PORT);     // Use hardwa
 // Alternatively you can define and use non-SPI pins!
 // Adafruit_SPIFlash flash(FLASH_SCK, FLASH_MISO, FLASH_MOSI, FLASH_SS);
 
-Adafruit_W25Q16BV_FatFs ascii_xfer_fatfs(ascii_xfer_flash);
+// Adafruit_W25Q16BV_FatFs ascii_xfer_fatfs(ascii_xfer_flash);
 
 
-void ascii_xfer_setup_spi_flash(void) {
+#ifdef NEVER_USED_OR_DEFINED
+
+void NEVER_USED__ascii_xfer_setup_spi_flash(void) {
 
   // Serial.println("Adafruit SPI Flash FatFs Full Usage Example");
   Serial.println("Adafruit SPI Flash - reading");
@@ -349,13 +379,14 @@ void ascii_xfer_setup_spi_flash(void) {
 
   // First call begin to mount the filesystem.  Check that it returns true
   // to make sure the filesystem was mounted.
-  if (!ascii_xfer_fatfs.begin()) {
+  if (!fatfs.begin()) {
     Serial.println("Error, failed to mount newly formatted filesystem!");
     Serial.println("Was the flash chip formatted with the fatfs_format example?");
     while(1);
   }
   Serial.println("Mounted filesystem!");
 }
+#endif
 
 
 
@@ -368,10 +399,10 @@ void create_test_directory(void) {
 
 #ifdef HAS_STANDARD_BUILD_HERE
 
-  if (!ascii_xfer_fatfs.exists("/test")) {
+  if (!fatfs.exists("/test")) {
     Serial.println("Test directory not found, creating...");
     // Use mkdir to create directory (note you should _not_ have a trailing slash).
-    if (!ascii_xfer_fatfs.mkdir("/test")) {
+    if (!fatfs.mkdir("/test")) {
       Serial.println("Error, failed to create test directory!");
       while(1);
     }
@@ -381,7 +412,7 @@ void create_test_directory(void) {
 
 #ifndef HAS_STANDARD_BUILD_HERE
 
-  if (!ascii_xfer_fatfs.exists("/test")) { Serial.println("BAD ROBOT - fatfs.exists fails on line 97.");
+  if (!fatfs.exists("/test")) { Serial.println("BAD ROBOT - fatfs.exists fails on line 97.");
   } else {
     Serial.println("local: assuming test directory already exists.");
   }
@@ -391,7 +422,10 @@ void create_test_directory(void) {
 
 
 
-void write_a_test_file(void) {
+
+
+
+void write_a_capture_file(void) {
   // Create a file in the test directory and write data to it.
   // Note the FILE_WRITE parameter which tells the library you intend to
   // write to the file.  This will create the file if it doesn't exist,
@@ -400,29 +434,31 @@ void write_a_test_file(void) {
   // using the FatFs f_open modes directly (which can be specified instead
   // of FILE_WRITE), see documentation at:
   //   http://elm-chan.org/fsw/ff/en/open.html
-  File writeFile = ascii_xfer_fatfs.open("/test/test.txt", FILE_WRITE);
+
+  // 03 Aug 15:52z -- try to use existing fatfs 'handle' / whatever it is
+  // result: does compile just fine.
+
+  // File writeFile = ascii_xfer_fatfs.open("/test/ascii_xfer_test.txt", FILE_WRITE);
+  File writeFile =               fatfs.open("/forth/ascii_xfer_test.txt", FILE_WRITE);
   if (!writeFile) {
-    Serial.println("Error, failed to open test.txt for writing!");
+    Serial.println("Error, failed to open ascii_xfer_test.txt for writing!");
     while(1);
   }
-  Serial.println("Opened file /test/test.txt for writing/appending...");
+  Serial.println("Opened file /forth/ascii_xfer_test.txt for writing/appending...");
 
   // Once open for writing you can print to the file as if you're printing
   // to the serial terminal, the same functions are available.
-  writeFile.println("Hello world!");
-  writeFile.println("SIXTH      run -- 08 July 2017 at 20:11z.");
-  writeFile.println("One if by land.");
-  writeFile.println("Two if by sea.");
-  writeFile.println("Three if by subway car.");
-  writeFile.println("Four if by ostritch-back.");
-  writeFile.println("Five if by bier.");
-  writeFile.println("Six if by hummingbird.");
-  writeFile.print("Hello number: "); writeFile.println(123, DEC);
-  writeFile.print("Hello hex number: 0x"); writeFile.println(123, HEX);
+
+
+
+// payload -- download mode.
+
+// model: Serial.print(cpSource);
+  writeFile.println(cpSource);
 
   // Close the file when finished writing.
   writeFile.close();
-  Serial.println("Wrote to file /test/test.txt!");
+  Serial.println("Wrote -- appended -- to file /forth/ascii_xfer_test.txt!");
 }
 
 
@@ -436,9 +472,11 @@ void write_a_test_file(void) {
 #ifndef HAS_STANDARD_BUILD_HERE
 void read_a_test_file(void) {
   // Now open the same file but for reading.
-  File readFile = ascii_xfer_fatfs.open("/forth/job.fs", FILE_READ);
+  // cheap_test: File readFile = fatfs.open("/forth/job.fs",             FILE_READ);
+  File readFile = fatfs.open("/forth/ascii_xfer_test.txt", FILE_READ);
   if (!readFile) {
-    Serial.println("Error, failed to open job.fs for reading!");
+    // cheap_test: Serial.println("Error, failed to open job.fs for reading!");
+    Serial.println("Error, failed to open /forth/ascii_xfer_test.txt for reading!");
     while(1);
   }
 
@@ -447,9 +485,12 @@ void read_a_test_file(void) {
   //   https://www.arduino.cc/en/reference/SD
   // Read a line of data:
   String line = readFile.readStringUntil('\n');
-  Serial.print("First line of job.fs: "); Serial.println(line);
+  // cheap_test: Serial.print("First line of job.fs: "); Serial.println(line);
+  Serial.print("First line of /forth/ascii_xfer_test.txt: "); Serial.println(line);
 
   // You can get the current position, remaining data, and total size of the file:
+  Serial.println("Ignore job.fs and say /forth/ascii_xfer_test.txt here - several lines.");
+
   Serial.print("Total size of job.fs (bytes): "); Serial.println(readFile.size(), DEC);
   Serial.print("Current position in job.fs: "); Serial.println(readFile.position(), DEC);
   Serial.print("Available data to read in job.fs: "); Serial.println(readFile.available(), DEC);
@@ -482,7 +523,7 @@ void read_a_test_file(void) {
 
 #ifndef HAS_STANDARD_BUILD_HERE
 void read_from_code_py_file(void) {
-  File readCodeFile = ascii_xfer_fatfs.open("/main.py", FILE_READ);
+  File readCodeFile = fatfs.open("/main.py", FILE_READ);
   if (!readCodeFile) {
     Serial.println("Error, failed to open code.py for reading!");
     while(1);
@@ -530,7 +571,7 @@ void tail_code_bb(void) {
 
 
 #ifndef HAS_STANDARD_BUILD_HERE
-  File testDirRoot = ascii_xfer_fatfs.open("/");
+  File testDirRoot = fatfs.open("/");
   if (!testDirRoot) {
     Serial.println("Error, failed to open root directory!");
     while(1);
@@ -541,7 +582,7 @@ void tail_code_bb(void) {
 
 
 #ifdef HAS_STANDARD_BUILD_HERE
-  File testDir = ascii_xfer_fatfs.open("/lib");
+  File testDir = fatfs.open("/lib");
   if (!testDir) {
     Serial.println("Error, failed to open test directory!");
     while(1);
@@ -632,10 +673,10 @@ void tail_code_bb(void) {
 
   // Delete a file with the remove command.  For example create a test2.txt file
   // inside /test/foo and then delete it.
-  File test2File = ascii_xfer_fatfs.open("/test/foo/test2.txt", FILE_WRITE);
+  File test2File = fatfs.open("/forth/foo/test2.txt", FILE_WRITE);
   test2File.close();
-  Serial.println("Deleting /test/foo/test2.txt...");
-  if (!ascii_xfer_fatfs.remove("/test/foo/test2.txt")) {
+  Serial.println("Deleting /forth/foo/test2.txt...");
+  if (!fatfs.remove("/forth/foo/test2.txt")) {
     Serial.println("Error, couldn't delete test.txt file!");
     while(1);
   }
@@ -646,12 +687,12 @@ void tail_code_bb(void) {
   // I.e. this is like running a recursive delete, rm -rf, in
   // unix filesystems!
   Serial.println("Deleting /test directory and everything inside it...");
-  if (!ascii_xfer_fatfs.rmdir("/test")) {
+  if (!fatfs.rmdir("/test")) {
     Serial.println("Error, couldn't delete test directory!");
     while(1);
   }
   // Check that test is really deleted.
-  if (ascii_xfer_fatfs.exists("/test")) {
+  if (fatfs.exists("/test")) {
     Serial.println("Error, test directory was not deleted!");
     while(1);
   }

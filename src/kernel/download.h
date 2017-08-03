@@ -10,5 +10,10 @@ extern void _dl_ends(void);
 
 extern uint8_t noInterpreter; // = FALSE ;
 
+// not here - look elsewhere: // extern void write_a_capture_file(void);
+
 // end.
+
+
+// getline.cpp:void write_a_capture_file(void) {
 

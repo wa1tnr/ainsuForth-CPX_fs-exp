@@ -1,16 +1,35 @@
-// Thu Aug  3 13:47:02 UTC 2017
-// 4735-b0d-01-
+// Thu Aug  3 15:41:33 UTC 2017
+// 4735-b0e-00-
 
-// KELKANNE  GRIAMO  FISPARD  16:16z Thu 03 Aug 2017
+// --------------------------------------------------
+// --------------------------------------------------
+// ---                                  -------------
+// ---   Thu Aug  3 16:25:56 UTC 2017   -------------
+// ---                                  -------------
+// --------------------------------------------------
+// --------------------------------------------------
+// SUCCESS.  Wrote a download file, then read it in, using the 'download' and then the 'load' words.  w00t.
+// --------------------------------------------------
+// --------------------------------------------------
+// --------------------------------------------------
+
+// BUG:  captures the '\end.' word to SPI flash file.  Omit in future revision.
+
+
+
+// MIPIXIC  CESSOME  RALDOXI  15:43z Thu 03 Aug 2017
+
+// parser looks (provisionally) functional for whole-line echo to capture file.
+
+
+
+
+// KELKANNE  GRIAMO  FISPARD 
 
 // file echo complete.  Needs: parsing (or 'de-parsing' -- for whole-line repeat).
 
 // partial: input line is echoed, and only once, in preparation for file capture to SPI flash as a file.fs or file.txt &c.
 
-// FIMSOPHE  GASCAV  PELLIAX 
-
-
-// CAPIVATTE   MELFONTUG   CHEFRIKABO FOSTIMIK  TEPLUNOK 
 
 // the 'see' word was reinstated.  Appears to function well.  2 July 22:44z
 
