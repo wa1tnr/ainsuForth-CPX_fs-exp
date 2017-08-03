@@ -1,10 +1,9 @@
 // Thu Aug  3 01:46:56 UTC 2017
 // 4735-b0d-00-
 
-// CAPIVATTE   MELFONTUG   CHEFRIKABO   01:48z Thu 03 Aug 2017
+// PELFOGUE   MASPA   VILMOX  03:05z Thu 03 Aug 2017
 
-// FOSTIMIK  TEPLUNOK   MUVALE  TEBCU KEPFIK  NAPSO  PLAVA  FELTU
-
+// CAPIVATTE   MELFONTUG   CHEFRIKABO FOSTIMIK  TEPLUNOK 
 
 // the 'see' word was reinstated.  Appears to function well.  2 July 22:44z
 
@@ -13,6 +12,10 @@
 // ++store_fetch.cpp
 // ++dict_entries.cpp
 // major housekeeping: dict_entries.h
+
+
+
+
 
 // quite a bit of juggling.  Mistakes made?
 

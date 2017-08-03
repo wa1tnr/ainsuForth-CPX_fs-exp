@@ -308,7 +308,12 @@ void loop(void) {
             }
         }
     } else { // test failed; do not run interpreter().
-        Serial.println(ok_str); // Leo Brodie 'Starting Forth' expects an ok here
+
+        if (noInterpreter) {
+            Serial.print("\r\n"); // just echo the CR/LF here
+        } else {
+            Serial.println(ok_str); // Leo Brodie 'Starting Forth' expects an ok here
+        }
     } // replace these four lines with a single closing curly brace
       // to restore YAFFA behavior.
 

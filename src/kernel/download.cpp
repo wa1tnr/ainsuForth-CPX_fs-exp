@@ -9,6 +9,7 @@
 const char download_str[] = "download"; // part of the main forth vocabulary, only
 void _download(void) {
     noInterpreter = TRUE; // download mode -- no standard interpreter -- use dl_interpreter
+    Serial.print("     NOTE: the \'\\end.\' word will exit the download-interpreter vocabulary.");
     // debug: // Serial.println("\r\n debug: download.cpp - the download word.\r\n");
 }
 
@@ -17,7 +18,7 @@ void _download(void) {
 const char dl_ends_str[] = "\\end.";  // type '\end.' to exit the download vocabulary.
 void _dl_ends(void) {
     noInterpreter = FALSE; 
-    Serial.println("\r\n DOWNLOAD ENDS. Please see: src/kernel/download.cpp \r\n");
+    Serial.println("\r\n DOWNLOAD ENDS. Please see: src/kernel/download.cpp");
 
     // August 3, 2017:
     // There was no file captured (at all).  This is just
