@@ -9,11 +9,18 @@
 \ Things to Try
 warm \ warm boots the machine.  Do this before some of the following snippets, to clear (especially prior to a 'load').
 
-: true -1 ; true echo! load  \ load without an echo to the console
-: true -1 ; true echo!       \ console does not echo until ENTER is pressed again.
+: false 0 ; : true -1 ; false echo! load  \ load without an echo to the console
+: false 0 ; false echo!       \ console does not echo until ENTER is pressed again.
 
 \ progress meter during the load:
-: true -1 ; 99 true echo! load  \ any stack item echoes a dot during a load. more is more:
+: false 0 ; 99 false echo! load  \ any stack item echoes a dot during a load. more is more:
 
 \ larger magnitude progress meter during the load:
-: true -1 ; 99 22 11 true echo! load  \ These are the same dots as usual but they're echoed contiguously here, since nothing else is to interleave with them.
+: false 0 ; 99 22 11 false echo! load  \ These are the same dots as usual but they're echoed contiguously here, since nothing else is to interleave with them.
+
+\ another demo of how a stack element causes a (cheap) progress meter:
+: false 0 ;  : true -1 ; : sload 44 false echo! load cr cr .s ; sload
+
+\ not sure if this '\end.' is parsed during a download or not:
+
+\end.
