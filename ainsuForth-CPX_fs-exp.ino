@@ -21,14 +21,16 @@
 
 // next: suppress echo during a file download.  Hmm.  It's suppressed when 'load' is run.
 
-// NOTE: it is a 'download' because one is logged into the SAMD21 board,
-// via USB and a terminal, and issues the command to 'download' from
+// NOTE: it is a 'load' because one is logged into the SAMD21 board,
+// via USB and a terminal, and issues the command to 'load' from
 // the SPI flashROM (a peripheral device) to the internal RAM of the SAMD21 chip
 // (and stored there in RAM, compiled such that the virtual machine can
 // execute this newly-stored program).
 // 
 // In that sense, 'compile' could also be a reasonable name for this same word.
 
+// 'download' is for when the forth Interpreter is leveraged to acquire
+// new source code to be stored onto SPI flashROM.
 
 // GNAGA
 
