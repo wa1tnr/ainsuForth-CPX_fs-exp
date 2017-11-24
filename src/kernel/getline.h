@@ -30,7 +30,7 @@ extern void setup_spi_flash(void);
 // #include <Arduino.h>
 // #include "../../yaffa.h"
 
-extern void ascii_xfer_setup_spi_flash(void);
+// SHOULD NOT BE NEEDED 06 Aug: extern void ascii_xfer_setup_spi_flash(void);
 
 extern void create_test_directory(void);
 

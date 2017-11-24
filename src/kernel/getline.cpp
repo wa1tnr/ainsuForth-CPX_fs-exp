@@ -324,7 +324,7 @@ char getKey(void) {
 // #define FLASH_SS       SS                    // Flash chip SS pin.
 // #define FLASH_SPI_PORT SPI                   // What SPI port is Flash on?
 
-Adafruit_SPIFlash ascii_xfer_flash(FLASH_SS, &FLASH_SPI_PORT);     // Use hardware SPI 
+// SHOULD NOT BE NEEDED 06 Aug:  Adafruit_SPIFlash ascii_xfer_flash(FLASH_SS, &FLASH_SPI_PORT);     // Use hardware SPI 
 
 // Alternatively you can define and use non-SPI pins!
 // Adafruit_SPIFlash flash(FLASH_SCK, FLASH_MISO, FLASH_MOSI, FLASH_SS);
@@ -650,7 +650,7 @@ void tail_code_bb(void) {
 }
 
 void ascii_xfer_spi_flash_main(void) {
-  ascii_xfer_setup_spi_flash();
+  // SHOULD NOT BE NEEDED 06 AUG: ascii_xfer_setup_spi_flash();
   create_test_directory();
   // write_a_test_file();
   // read_a_test_file();

@@ -1,5 +1,5 @@
-// Thu Aug  3 19:07:55 UTC 2017
-// 4735-b0f-00-
+// Sun Aug  6 20:09:53 UTC 2017
+// 4735-b0f-03-
 
 // poor practice -- hard coded the answer:
 #ifdef HAS_DOTSTAR_LIB
@@ -205,6 +205,11 @@ void setup(void) {
 #define HAS_SPI_FLASH_DEMO
 
 #ifdef HAS_SPI_FLASH_DEMO
+
+
+// src/kernel/getline.cpp:33:void setup_spi_flash(void) {
+// src/kernel/getline.cpp:653:  ascii_xfer_setup_spi_flash();
+
   setup_spi_flash();
       // WORKS: 01 Aug 04:09z
       // read_a_test_file();
