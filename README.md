@@ -22,7 +22,7 @@ A Forth for SAMD21G18A based on YAFFA-ARM Forth - 2012 by Stuart Wood.
 See compatibility.h for (some) configuration options across
 target board devices (subset of boards.txt found under
 
-  .arduino15/packages/adafruit/hardware/samd/1.0.18/boards.txt
+  .arduino15/packages/adafruit/hardware/samd/1.0.18/boards.txt )
 
 ----------------------------------------------------------------
 Current platform is the
