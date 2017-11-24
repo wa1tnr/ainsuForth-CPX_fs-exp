@@ -1,5 +1,14 @@
+// Fri Nov 24 05:23:48 UTC 2017
+// 4735-b0c-09a-   the -09x- is new Nov 24, 2017.
+
+// implemented a cpp macro to name the file read or written to SPI flashROM. 24 NOV 2017
+
+// previous timestamp:
 // Thu Aug  3 19:07:55 UTC 2017
 // 4735-b0f-00-
+
+// macro to name the file read or written to SPI flashROM.
+#define SPI_FlashROM_FILENAME "/forth/ascii_xfer_a001.txt"
 
 #include <Arduino.h>
 #include "../../yaffa.h"
@@ -65,12 +74,12 @@ uint8_t getLine(char* ptr, uint8_t buffSize) {
 
   if (spiFlashReading) {
       // cheap_test: if (fatfs.exists("/forth/job.fs")) {
-      if (fatfs.exists("/forth/ascii_xfer_test.txt")) {
+      if (fatfs.exists(SPI_FlashROM_FILENAME)) {
           if (fileClosed) {
             // Serial.println("(re)opening fatfs .. verify it is okay to do so.");
 
             // cheap_test: File forthSrcFile = fatfs.open("/forth/job.fs",             FILE_READ);
-            File forthSrcFile = fatfs.open("/forth/ascii_xfer_test.txt", FILE_READ);
+            File forthSrcFile = fatfs.open(SPI_FlashROM_FILENAME, FILE_READ);
             thisFile = (File) forthSrcFile;
             fileClosed = FALSE ; // it is open, now.
           }
@@ -379,9 +388,11 @@ void write_a_capture_file(void) {
   // result: does compile just fine.
 
   // File writeFile = ascii_xfer_fatfs.open("/test/ascii_xfer_test.txt", FILE_WRITE);
-  File writeFile =               fatfs.open("/forth/ascii_xfer_test.txt", FILE_WRITE);
+  File writeFile =               fatfs.open(SPI_FlashROM_FILENAME, FILE_WRITE);
   if (!writeFile) {
-    Serial.println("Error, failed to open ascii_xfer_test.txt for writing!");
+    Serial.print("Error, failed to open ");
+    Serial.print(SPI_FlashROM_FILENAME);
+    Serial.println(" for writing!");
     while(1);
   }
   // debug: // Serial.println("Opened file /forth/ascii_xfer_test.txt for writing/appending...");
@@ -413,10 +424,14 @@ void write_a_capture_file(void) {
 void read_a_test_file(void) {
   // Now open the same file but for reading.
   // cheap_test: File readFile = fatfs.open("/forth/job.fs",             FILE_READ);
-  File readFile = fatfs.open("/forth/ascii_xfer_test.txt", FILE_READ);
+  File readFile = fatfs.open(SPI_FlashROM_FILENAME, FILE_READ);
+
   if (!readFile) {
     // cheap_test: Serial.println("Error, failed to open job.fs for reading!");
-    Serial.println("Error, failed to open /forth/ascii_xfer_test.txt for reading!");
+    // Serial.println("Error, failed to open /forth/ascii_xfer_test.txt for reading!");
+    Serial.print("Error, failed to open ");
+    Serial.print(SPI_FlashROM_FILENAME);
+    Serial.println(" for reading!");
     while(1);
   }
 
@@ -426,13 +441,15 @@ void read_a_test_file(void) {
   // Read a line of data:
   String line = readFile.readStringUntil('\n');
   // cheap_test: Serial.print("First line of job.fs: "); Serial.println(line);
-  Serial.print("First line of /forth/ascii_xfer_test.txt: ");
-
+  Serial.print("First line of ");
+  Serial.print(SPI_FlashROM_FILENAME);
 
   Serial.println(line);
 
   // You can get the current position, remaining data, and total size of the file:
-  Serial.println("Ignore job.fs and say /forth/ascii_xfer_test.txt here - several lines.");
+  Serial.print("Ignore job.fs and say ");
+  Serial.print(SPI_FlashROM_FILENAME);
+  Serial.print(" here - several lines.");
 
   Serial.print("Total size of job.fs (bytes): "); Serial.println(readFile.size(), DEC);
   Serial.print("Current position in job.fs: "); Serial.println(readFile.position(), DEC);

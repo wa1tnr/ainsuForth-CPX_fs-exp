@@ -1,9 +1,15 @@
-// Fri Nov 24 04:49:08 UTC 2017
-// 4735-b0c-07z-   the -07x- is new Nov 19, 2017.
+// Fri Nov 24 05:23:48 UTC 2017
+// 4735-b0c-09a-   the -09x- is new Nov 24, 2017.
 
-// KETFILET   TAKKEV
+// Use cpp macro to name the file read or written to SPI flashROM.
+
+
+// MAKRIS   KETFILET   TAKKEV
 
 // previous timestamp:
+
+// Fri Nov 24 04:49:08 UTC 2017
+// 4735-b0c-07z-   the -07x- is new Nov 19, 2017.
 
 // Fri Nov 24 02:42:54 UTC 2017
 // Thu Aug  3 19:07:55 UTC 2017
