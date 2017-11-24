@@ -1,9 +1,10 @@
-// Fri Nov 24 02:42:54 UTC 2017
-// 4735-b0c-07x-   the -07x- is new Nov 19, 2017.
+// Fri Nov 24 04:49:08 UTC 2017
+// 4735-b0c-07z-   the -07x- is new Nov 19, 2017.
 
-// refresh only - no other changes besides these timestamp lines up top. -24 Nov 2017
+// _count() fix  (was earlier: _dot_paren() fix that wasn't broken, after all).
 
 // previous timestamp:
+// Fri Nov 24 02:42:54 UTC 2017
 // Sun Aug  6 20:09:53 UTC 2017
 // 4735-b0f-03-
 
@@ -240,6 +241,9 @@ void setup(void) {
   
   // Serial.print("\n warm boot message - early bird.  //  Gemma M0 29 Jul 2017\r\n          type 'warm' to reboot"); // instant confirmation
      Serial.print("\n warm boot message - early bird.  //  Adafruit CPlay Express (CPX)\r\n      DEVELOPMENT 03 Aug 2017\r\n          type 'warm' to reboot"); // instant confirmation
+     Serial.print("\n Fri Nov 24 02:42:54 UTC 2017");
+     Serial.print("\n 4735-b0c-07x-"); 
+
   // Serial.print("\n warm boot message - early bird.  //  Adafruit Metro M0 Express\r\n      snapshot 30 Jul 2017\r\n          type 'warm' to reboot"); // instant confirmation
   // Serial.print("\n warm boot message - early bird.  //  Adafruit Feather M0 Express\r\n      snapshot 30 Jul 2017\r\n          type 'warm' to reboot"); // instant confirmation
 

@@ -1,21 +1,27 @@
-// Fri Nov 24 02:42:54 UTC 2017
-// 4735-b0c-07x-   the -07x- is new Nov 19, 2017.
+// Fri Nov 24 04:49:08 UTC 2017
+// 4735-b0c-07z-   the -07x- is new Nov 19, 2017.
 
+// KETFILET   TAKKEV
 
 // previous timestamp:
 
+// Fri Nov 24 02:42:54 UTC 2017
 // Thu Aug  3 19:07:55 UTC 2017
 // 4735-b0f-00-
 
 // MULAMOTTE   HELEGRIDAK   03 Aug 2017  19:07z  -  the echo! word controls some silences
 
-// KELDRIN  NOKURVID   FOSTETH 
+// KELDRIN  NOKURVID
 
 // next: suppress echo during a file download.  Hmm.  It's suppressed when 'load' is run.
 
 // NOTE: it is a 'download' because one is logged into the SAMD21 board,
 // via USB and a terminal, and issues the command to 'download' from
-// the host PC to the stamp (SAMD21 target board).
+// the SPI flashROM (a peripheral device) to the internal RAM of the SAMD21 chip
+// (and stored there in RAM, compiled such that the virtual machine can
+// execute this newly-stored program).
+// 
+// In that sense, 'compile' could also be a reasonable name for this same word.
 
 
 // GNAGA
