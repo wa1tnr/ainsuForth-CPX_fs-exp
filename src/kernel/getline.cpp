@@ -3,6 +3,12 @@
 
 // implemented a cpp macro to name the file read or written to SPI flashROM. 24 NOV 2017
 
+// To ignore previous files stored in SPI flashROM, change the macro below
+// to name a new file, then recompile the program and upload it
+// to the target, using standard Arduino toolchain.  This is a kludge
+// to allow a fresh program download from the forth interpreter into
+// spi flashROM.
+
 // previous timestamp:
 // Thu Aug  3 19:07:55 UTC 2017
 // 4735-b0f-00-
