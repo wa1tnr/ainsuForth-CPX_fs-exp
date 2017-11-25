@@ -1,3 +1,8 @@
+// Sat Nov 25 19:03:16 UTC 2017
+// 4735-b0c-09d-   the -09x- is new Nov 24, 2017.
+
+// EXT_KERN_ACCEPT - 25 Nov 2017
+
 // Thu Aug  3 01:46:56 UTC 2017
 // 4735-b0d-00-
 
@@ -37,6 +42,8 @@
 #endif
 
 
+// NOT compiled out.  Be sure to also NOT remove from flashdict.h
+#define EXT_KERN_ACCEPT // new 25 Nov - reinstate the accept word from original upstream source
 #define EXT_KERN_ALLOT
 #define EXT_KERN_CONSTANT
 #define EXT_KERN_XTTONAME

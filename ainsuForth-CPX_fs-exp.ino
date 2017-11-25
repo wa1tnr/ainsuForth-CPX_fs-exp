@@ -1,6 +1,7 @@
-// Sat Nov 25 02:01:09 UTC 2017
-// 4735-b0c-09c-   the -09x- is new Nov 24, 2017.
+// Sat Nov 25 19:03:16 UTC 2017
+// 4735-b0c-09d-   the -09x- is new Nov 24, 2017.
 
+// timestamped only. 19:04z
 
 // NOTE: Cannot go very far without learning something about this:
 
@@ -21,6 +22,7 @@
 
 // previous timestamp:
 
+// Sat Nov 25 02:01:09 UTC 2017
 // Fri Nov 24 05:23:48 UTC 2017
 // 4735-b0c-09a-   the -09x- is new Nov 24, 2017.
 // Fri Nov 24 04:49:08 UTC 2017

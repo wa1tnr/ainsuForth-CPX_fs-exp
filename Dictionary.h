@@ -1,7 +1,10 @@
-// Fri Nov 24 23:31:39 UTC 2017
-// 4735-b0c-09b-   the -09x- is new Nov 24, 2017.
+// Sat Nov 25 19:03:16 UTC 2017
+// 4735-b0c-09d-   the -09x- is new Nov 24, 2017.
+
+// accept.h included
 
 // previous timestamp:
+// Fri Nov 24 23:31:39 UTC 2017
 // Wed Aug  2 18:04:12 UTC 2017
 // 4735-b0c-05-
 
@@ -14,6 +17,7 @@
 // #include "src/kernel/stacks.h"
 
 // #include "src/dict/commas.cpp"
+#include "src/dict/accept.h"
 #include "src/dict/dump.h"
 
 #include "src/dict/cblink.h"
