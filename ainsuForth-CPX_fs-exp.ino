@@ -1,5 +1,17 @@
-// Fri Nov 24 23:31:39 UTC 2017
-// 4735-b0c-09b-   the -09x- is new Nov 24, 2017.
+// Sat Nov 25 02:01:09 UTC 2017
+// 4735-b0c-09c-   the -09x- is new Nov 24, 2017.
+
+
+// NOTE: Cannot go very far without learning something about this:
+
+//    libraries/Adafruit_SPIFlash/examples/fatfs_full_usage/fatfs_full_usage.ino
+
+// If you're uninterested, avoid the download, load and remove words.  Maybe others.
+
+// Those words deal with the onboard SPI flashROM found on
+// Adafruit M0 target boards, such as the Circuit Playground
+// Express ('Express' in the name usually implies presence of
+// SPI flashROM on that target board).
 
 
 // Use cpp macro to name the file read or written to SPI flashROM.
