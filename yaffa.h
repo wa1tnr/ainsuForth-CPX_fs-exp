@@ -42,7 +42,7 @@
 #endif
 
 
-// NOT compiled out.  Be sure to also NOT remove from flashdict.h
+
 #define EXT_KERN_ACCEPT // new 25 Nov - reinstate the accept word from original upstream source
 #define EXT_KERN_ALLOT
 #define EXT_KERN_CONSTANT
