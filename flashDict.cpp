@@ -1,3 +1,7 @@
+// Fri Nov 24 23:31:39 UTC 2017
+// 4735-b0c-09b-   the -09x- is new Nov 24, 2017.
+
+// previous timestamp:
 // Thu Aug  3 01:46:56 UTC 2017
 // 4735-b0d-00-
 
@@ -289,6 +293,7 @@ const flashEntry_t flashDict[] = {
 #ifdef SPI_FLASH_SRC
   { load_str,           _load,            NORMAL },
   { echo_bang_str,      _echo_bang,       NORMAL }, 
+  { remove_str,         _remove,          NORMAL },
   { download_str,       _download,        NORMAL },
 #endif // #ifdef SPI_FLASH_SRC
 

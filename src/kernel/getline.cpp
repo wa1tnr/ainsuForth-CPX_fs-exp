@@ -1,5 +1,5 @@
-// Fri Nov 24 05:23:48 UTC 2017
-// 4735-b0c-09a-   the -09x- is new Nov 24, 2017.
+// Fri Nov 24 23:31:39 UTC 2017
+// 4735-b0c-09b-   the -09x- is new Nov 24, 2017.
 
 // implemented a cpp macro to name the file read or written to SPI flashROM. 24 NOV 2017
 
@@ -9,7 +9,9 @@
 // to allow a fresh program download from the forth interpreter into
 // spi flashROM.
 
-// previous timestamp:
+// previous timestamps:
+// Fri Nov 24 05:23:48 UTC 2017
+// 4735-b0c-09a-   the -09x- is new Nov 24, 2017.
 // Thu Aug  3 19:07:55 UTC 2017
 // 4735-b0f-00-
 
@@ -376,9 +378,36 @@ void create_test_directory(void) {
 }
 
 
+void remove_a_file(void) {
 
+  Serial.print("file: Deleting ");
+  Serial.print(SPI_FlashROM_FILENAME);
+  Serial.println("...");
 
+  if (!fatfs.remove(SPI_FlashROM_FILENAME)) {
+      Serial.print("Error, file ");
+      Serial.print(SPI_FlashROM_FILENAME);
+      Serial.println(" was not removed!");
+      while(1);
+  }
+  Serial.println("Deleted file!");
+  // kludge: disallow this filename to be missing from the directory - create a blank new file:
+  File writeFile = fatfs.open(SPI_FlashROM_FILENAME, FILE_WRITE);
 
+  if (!writeFile) {
+      Serial.print("Error, failed to open ");
+      Serial.print(SPI_FlashROM_FILENAME);
+      Serial.println(" for writing!");
+      while(1); // what does this do .. hold the program in a forever loop upon failure?
+      Serial.println("Exiting forever loop of getline.cpp -- probably means a serious error occurred. LINE 408.");
+  } else {
+  Serial.println("An empty new file was created in its place.");
+  Serial.println("This kludge will go away when multi-filename usage is more fully integrated.");
+  writeFile.println(" ");
+  // writeFile.println(".( WRITE FILE is done.\) cr");
+  writeFile.close(); // housekeeping.
+  }
+}
 
 void write_a_capture_file(void) {
   // Create a file in the test directory and write data to it.

@@ -1,3 +1,8 @@
+// Fri Nov 24 23:31:39 UTC 2017
+// 4735-b0c-09b-   the -09x- is new Nov 24, 2017.
+
+// previous timestamp:
+
 // Thu Aug  3 19:07:55 UTC 2017
 // 4735-b0f-00-
 
@@ -34,6 +39,7 @@ extern void setup_spi_flash(void);
 
 extern void create_test_directory(void);
 
+extern void remove_a_file(void); // new 24 Nov 2017
 extern void write_a_test_file(void);
 
 #ifndef HAS_STANDARD_BUILD_HERE
