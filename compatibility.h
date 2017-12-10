@@ -1,3 +1,7 @@
+// Sun Dec 10 22:48:03 UTC 2017
+// 4735-b0d-00b-   the -00x- is new Dec 10, 2017.
+
+// previous timestamp:
 // Wed Aug  2 18:04:12 UTC 2017
 // 4735-b0c-05-
 
@@ -27,4 +31,9 @@
 // CPX - Circuit Playground M0 (Circuit Playground Express)
 // + npx x10  + SPI flash 2MB
 // CRYSTALLESS ARDUINO_SAMD_ZERO __SAMD21G18A__ ADAFRUIT_CIRCUITPLAYGROUND_M0
+
+// reverse these two lines to enable SPI flashROM support:
+#define HAS_SPI_FLASH_DEMO
+#undef HAS_SPI_FLASH_DEMO
+// load echo! remove download are relevant only to presence of SPI flashROM.
 

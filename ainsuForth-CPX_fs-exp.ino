@@ -1,9 +1,10 @@
-// Sat Nov 25 19:03:16 UTC 2017
-// 4735-b0c-09d-   the -09x- is new Nov 24, 2017.
+// Sun Dec 10 22:48:03 UTC 2017
+// 4735-b0d-00b-   the -00x- is new Dec 10, 2017.
 
-// timestamped only. 19:04z
+// HELCUBIK  CANDALOX  TELURIXIANO  ELIAS NEKTUVIA
 
-// NOTE: Cannot go very far without learning something about this:
+// NOTE: Cannot go very far with the new SPI flashROM support for
+// ainsuForth, without learning something about this:
 
 //    libraries/Adafruit_SPIFlash/examples/fatfs_full_usage/fatfs_full_usage.ino
 
@@ -15,13 +16,70 @@
 // SPI flashROM on that target board).
 
 
-// Use cpp macro to name the file read or written to SPI flashROM.
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - -      SPI  flashROM    - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// This commit provides for lack of any initialized filesystem
+// on the target SPI flashROM chip, by disabling the routines
+// that interact with the SPI flashROM.
+
+// To re-enable, make a filesystem on the target's SPI flashROM,
+// and add a '/forth' directory, as well as an initial file.
+
+// Circuit Python is the suggested tool for this.
+
+// It can be done in the Arduino system as well.
+
+// Also, edit compatibility.h near the bottom of that file:
+
+//   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//    31  // reverse these two lines to enable SPI flashROM support:
+//    32  #undef HAS_SPI_FLASH_DEMO
+//    33  #define HAS_SPI_FLASH_DEMO
+//    34  // load echo! remove download are relevant only to presence of SPI flashROM.
+//   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// Use a cpp (C preprocessor) macro to name the file that is
+// read from, or written to, the SPI flashROM.
+
+// from src/kernel/getline.cpp:
+
+// 18 // macro to name the file read or written to SPI flashROM.
+// 19 #define SPI_FlashROM_FILENAME "/forth/ascii_xfer_a001.txt"
+
+// That's the expected path to the sample filename (cannot be
+// changed elsewhere, only in getline.cpp, in this revision of
+// the code).
+
+// If the advice given is overlooked (this happens on an uninitialized
+// target SPI flashROM, after an erasure, for example) then the system
+// won't start properly:
+
+// $ microcom -s 115200 -p /dev/ttyACM0 
+// connected to /dev/ttyACM0
+// 
+// f_mount failed with error code: 13
+// E: fatfs.begin() fault.
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
 
 
 // REMI   MAKRIS   KETFILET   TAKKEV
 
 // previous timestamp:
 
+// Sat Nov 25 19:03:16 UTC 2017
+// 4735-b0c-09d-   the -09x- is new Nov 24, 2017.
 // Sat Nov 25 02:01:09 UTC 2017
 // Fri Nov 24 05:23:48 UTC 2017
 // 4735-b0c-09a-   the -09x- is new Nov 24, 2017.

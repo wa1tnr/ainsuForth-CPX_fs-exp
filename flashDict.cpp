@@ -1,10 +1,14 @@
-// Sat Nov 25 19:03:16 UTC 2017
-// 4735-b0c-09d-   the -09x- is new Nov 24, 2017.
+// Sun Dec 10 22:48:03 UTC 2017
+// 4735-b0d-00b-   the -00x- is new Dec 10, 2017.
+
+// SPI flashROM stuff
+// look for #ifdef HAS_SPI_FLASH_DEMO   10 Dec 2017
 
 // the accept word
 
-
 // previous timestamp:
+// Sat Nov 25 19:03:16 UTC 2017
+// 4735-b0c-09d-   the -09x- is new Nov 24, 2017.
 // Fri Nov 24 23:31:39 UTC 2017
 // 4735-b0c-09b-   the -09x- is new Nov 24, 2017.
 // Thu Aug  3 01:46:56 UTC 2017
@@ -298,10 +302,12 @@ const flashEntry_t flashDict[] = {
 
 #define SPI_FLASH_SRC
 #ifdef SPI_FLASH_SRC
+#ifdef HAS_SPI_FLASH_DEMO
   { load_str,           _load,            NORMAL },
   { echo_bang_str,      _echo_bang,       NORMAL }, 
   { remove_str,         _remove,          NORMAL },
   { download_str,       _download,        NORMAL },
+#endif // #ifdef HAS_SPI_FLASH_DEMO
 #endif // #ifdef SPI_FLASH_SRC
 
 
